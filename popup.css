@@ -1,0 +1,16 @@
+body
+{
+    background: rgba(35, 35, 35, 1);
+    color: white;
+}
+
+.frequency-options
+{
+    display: flex;
+}
+
+.option-button
+{
+    width: auto;
+    height: auto;
+}
