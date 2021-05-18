@@ -4,6 +4,14 @@ body
     color: white;
 }
 
+.title
+{
+    font-family: Hanley Pro Script;
+    font-size: x-large;
+    font-weight: bold;
+    font-style: italic;
+}
+
 .frequency-options
 {
     display: flex;
