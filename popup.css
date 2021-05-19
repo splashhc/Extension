@@ -22,3 +22,11 @@ body
     width: auto;
     height: auto;
 }
+
+.multiColorBar
+{
+    height: 5px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background: linear-gradient(to right, gray, red, orange, blue, green);
+}
