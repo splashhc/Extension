@@ -1,6 +1,6 @@
 body
 {
-    background: rgba(35, 35, 35, 1);
+    background: rgb(27, 27, 27);
     color: white;
 }
 
@@ -16,12 +16,34 @@ body
 .frequency-options
 {
     display: flex;
+    padding: 5px;
 }
 
 .option-button
 {
-    width: auto;
-    height: auto;
+    width: 111px;
+    height: 30px;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 2px;
+    border-color:rgb(56, 55, 55);
+    color: rgb(145, 145, 145);
+    background: rgb(41, 41, 41);
+}
+
+.option-button:not(:last-child)
+{
+    margin-right: 5px;
+}
+
+.option-button:hover
+{
+    color:rgb(255, 255, 255);
+}
+
+.option-button:active
+{
+    background: rgb(61, 61, 61);
 }
 
 .multiColorBar
