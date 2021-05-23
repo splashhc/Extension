@@ -36,4 +36,3 @@ document.getElementById('manual').onclick = function() {
   window.alert("Hello?...")
 }
 
-// Test comment.
