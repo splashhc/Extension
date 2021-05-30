@@ -2,6 +2,8 @@ body
 {
     background: rgb(48, 48, 48);
     color: white;
+    display: flex;
+    flex-direction: column;
 }
 
 .title
@@ -17,6 +19,11 @@ body
 {
     display: flex;
     padding: 5px;
+}
+
+.mode-select
+{
+    margin: auto 0 auto auto;
 }
 
 .option-button
