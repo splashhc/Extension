@@ -35,4 +35,3 @@ document.getElementById('rarely').onclick = function() {
 document.getElementById('manual').onclick = function() {
   window.alert("Hello?...")
 }
-
