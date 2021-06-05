@@ -11,4 +11,3 @@ fetch(url)
     var tables = html.querySelectorAll(".wikitable");
     console.log(tables);
   })
-
