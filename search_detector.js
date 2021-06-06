@@ -1,19 +1,20 @@
-// block level scope is needed to avoid errors
-{
-    let query_utf_8 = getSearchUTF8(window.location.search.replace(/\+/g, ' '));
-    let query = decodeURIComponent(query_utf_8.q);
-    console.log("You searched for: " + query); // only used to verify the search detection works
-}
+// replace all '+' characters in the raw URL with spaces using RegEx before processing
+var queryUtf8 = getSearchUtf8(window.location.search.replace(/\+/g, ' '));
+var query = decodeURIComponent(queryUtf8.q);
+chrome.storage.local.set({"query": query});
 
-function getSearchUTF8(url)
+//console.log("You searched for: " + query); // only used to verify the search detection works
+
+function getSearchUtf8(url)
 {
-    let words = [], hash;
-    let hashes = url.slice(url.indexOf('?') + 1).split('&');
-    for(let i = 0; i < hashes.length; i++)
+    let searchTerms = [];
+    let currentTerm = undefined;
+    let termBuffer = url.slice(url.indexOf('?') + 1).split('&');
+    for(let index = 0; index < termBuffer.length; index++)
     {
-        hash = hashes[i].split('=');
-        words.push(hash[0]);
-        words[hash[0]] = hash[1];
+        currentTerm = termBuffer[index].split('=');
+        searchTerms.push(currentTerm[0]);
+        searchTerms[currentTerm[0]] = currentTerm[1];
     }
-    return words;
+    return searchTerms;
 }
