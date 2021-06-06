@@ -23,15 +23,19 @@ function setMulticolorText()
 }
 
 // Response when button is clicked.
-document.getElementById('everySearch').onclick = function() {
+document.getElementById('everySearch').onclick = function()
+{
   window.alert("Hello, World.")
 }
-document.getElementById('occasionally').onclick = function() {
+document.getElementById('occasionally').onclick = function()
+{
   window.alert("Hello, Galaxy.")
 }
-document.getElementById('rarely').onclick = function() {
+document.getElementById('rarely').onclick = function()
+{
   window.alert("Hello, Universe.")
 }
-document.getElementById('manual').onclick = function() {
+document.getElementById('manual').onclick = function()
+{
   window.alert("Hello?...")
 }
