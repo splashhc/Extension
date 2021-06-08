@@ -1,10 +1,9 @@
 chrome.storage.local.get("query", function(data)
 {
   let query = data.query; // change this if we're using randomized facts rather than context facts
-
-  console.log("The query is: " + query);
   processFacts(query);
 
+  //console.log("The query is: " + query);
   //console.log("url is: " + url); 
 });
 
@@ -15,10 +14,8 @@ async function processFacts(searchedQuery)
   let summary = await getSummaryFromPageId(urlAndPageId[0]);
   let facts = splitSummaryIntoFacts(summary);
   let result = getRandomFactFromFactArray(query, facts);
+  chrome.runtime.sendMessage({message: result});
 
-  chrome.runtime.sendMessage({message: result}); //
-
-  
   //console.log(result); // instead of logging the result, we will need to display the result somehow
 }
 

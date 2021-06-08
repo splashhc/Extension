@@ -33,6 +33,6 @@ function detectSearch(details)
         
         chrome.scripting.executeScript({ 
             target: {tabId: details.tabId},
-            files: ["wikipediascraper.js"]}, _=> chrome.runtime.lastError);
+            files: ["wikipedia_scraper.js"]}, _=> chrome.runtime.lastError);
     }
 }
