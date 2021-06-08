@@ -11,11 +11,11 @@ async function getWikipediaUrlFromQuery(query)
     let data = await response.json();
     let pageId = data.query.search[0].pageid;
     let wikipediaUrl = `https://en.wikipedia.org/?curid=${pageId}`;
-    //console.log(wikipediaUrl);
+    // console.log(wikipediaUrl);
     return wikipediaUrl;
 }
 
-// not yet working since we don't yet have a URL
+// Not yet working since we don't yet have a URL
 // function getWikipediaData(url)
 // {
 //   fetch(url)
