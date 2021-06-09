@@ -50,6 +50,7 @@ function getRandomFactFromFactArray(query, facts)
 {
   let maxIndex = facts.length;
   let randomIndex = Math.floor((Math.random() * maxIndex));
-  let formattedFacts = `${query}: ${facts[randomIndex]}`;
+  let formattedQuery = query.toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, char => char.toUpperCase());
+  let formattedFacts = `${formattedQuery}: ${facts[randomIndex]}`;
   return formattedFacts;
 }
