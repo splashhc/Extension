@@ -8,7 +8,7 @@ function setMulticolorText()
   let title = document.getElementsByClassName("title").item(0);
 
   // The colors to cycle between the letters.
-  let colors = new Array("rgb(207, 0, 0)", "rgb(0, 207, 26)", "rgb(14, 97, 234)");
+  // let colors = new Array("rgb(207, 0, 0)", "rgb(0, 207, 26)", "rgb(14, 97, 234)");
 
   // The HTML code to replace the title object's HTML with.
   let content = "";

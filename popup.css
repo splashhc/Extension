@@ -8,11 +8,13 @@ body
 
 .title
 {
-    font-family: Hanley Pro Script;
+    font-family: 'Lobster';
     font-size: x-large;
     font-weight: bold;
     font-style: italic;
+    color:rgb(145, 145, 145);
     margin: 0px;
+    text-shadow:rgb(255, 255, 255)
 }
 
 .frequency-options
@@ -122,3 +124,25 @@ input:checked + .slider.before
     -ms-transform: translateX(26px);
     transform: translateX(26px);
 }
+
+.custom-shape-divider-bottom-1623284661 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1623284661 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 5.0px);
+    height: 35px;
+}
+
+.custom-shape-divider-bottom-1623284661 .shape-fill {
+    fill: gray;
+}
+
