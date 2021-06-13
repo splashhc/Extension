@@ -1,10 +1,10 @@
 chrome.storage.local.get("query", function(data)
 {
-  let query = data.query; // change this if we're using randomized facts rather than context facts
+  let query = data.query; // Change this if we're using randomized facts rather than context facts.
   processFacts(query);
 
-  //console.log("The query is: " + query);
-  //console.log("url is: " + url); 
+  // console.log("The query is: " + query);
+  // console.log("url is: " + url); 
 });
 
 async function processFacts(searchedQuery)
@@ -16,10 +16,10 @@ async function processFacts(searchedQuery)
   let result = getRandomFactFromFactArray(query, facts);
   chrome.runtime.sendMessage({message: result});
 
-  //console.log(result); // instead of logging the result, we will need to display the result somehow
+  // console.log(result); -- Rather than logging the result, we will need to display the result somehow.
 }
 
-// element 0 is pageId, element 1 is wikipedia URL
+// Element 0 is pageId; Element 1 is wikipedia URL.
 async function getUrlAndPageIdFromQuery(query)
 {
   let url = encodeURI(`https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${query}`);
@@ -39,10 +39,10 @@ async function getSummaryFromPageId(pageId)
   return summary;
 }
 
-// returns a string array of the summary split into individual sentences
+// Returns a string array of the summary split into individual sentences.
 function splitSummaryIntoFacts(summary)
 {
-  // str.replace(/\.(?!\d)|([^\d])\.(?=\d)/g,'$1.|') this regex may be better
+  // str.replace(/\.(?!\d)|([^\d])\.(?=\d)/g,'$1.|') -- This regex may be better.
   return summary.replace(/([.?!])\s*(?=[A-Z])/g, "$1|").split("|");
 }
 
