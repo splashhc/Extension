@@ -3,7 +3,7 @@ var queryUtf8 = getSearchUtf8(window.location.search.replace(/\+/g, ' '));
 var query = decodeURIComponent(queryUtf8.q);
 chrome.storage.local.set({"query": query});
 
-// console.log("You searched for: " + query); // is only used to verify the search detection works.
+// console.log("You searched for: " + query); -- only used to verify the search detection works.
 
 function getSearchUtf8(url)
 {
@@ -18,3 +18,5 @@ function getSearchUtf8(url)
     }
     return searchTerms;
 }
+
+// Test comment.
