@@ -57,10 +57,10 @@ body
 
 .multiColorBar
 {
-    height: 5px;
-    border: 2px solid black;
-    border-radius: 10px;
-    background: linear-gradient(to right, gray, red, orange, blue, green);
+    height: 3px;
+    border: 0px solid black;
+    border-radius: 8px;
+    background: linear-gradient(to right, white, gray);
 }
 
 .switch
@@ -145,4 +145,3 @@ input:checked + .slider.before
 .custom-shape-divider-bottom-1623284661 .shape-fill {
     fill: gray;
 }
-
