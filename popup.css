@@ -1,5 +1,7 @@
 body
 {
+    font-family: 'Staatliches', cursive;
+    font-size: medium;
     background: rgb(48, 48, 48);
     color: white;
     display: flex;
@@ -14,7 +16,7 @@ body
     font-style: italic;
     color:rgb(145, 145, 145);
     margin: 0px;
-    text-shadow:rgb(255, 255, 255)
+    text-shadow: 2px 2px black;
 }
 
 .frequency-options
