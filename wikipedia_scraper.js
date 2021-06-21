@@ -43,7 +43,7 @@ async function getSummaryFromPageId(pageId)
 function splitSummaryIntoFacts(summary)
 {
   // str.replace(/\.(?!\d)|([^\d])\.(?=\d)/g,'$1.|') -- This regex may be better.
-  return summary.replace(/(?<!Dr|Rd|Mr|Mrs|Ms|\b[A-Z])[.?!]\s*/g, "$1|").split("|");
+  return summary.replace(/((?<!Dr|Rd|Mr|Mrs|Ms|\b[A-Z])[.?!]\s*)/g, "$1|").split("|");
 }
 
 function getRandomFactFromFactArray(query, facts)
