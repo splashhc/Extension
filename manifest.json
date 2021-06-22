@@ -3,7 +3,7 @@
   "description": "Relevant contextual facts, right to your browser!",
   "version": "1.0",
   "manifest_version": 3,
-  "permissions": ["tabs", "scripting", "storage", "notifications", "webNavigation"],
+  "permissions": ["tabs", "scripting", "storage", "notifications", "webNavigation", "background"],
   "host_permissions": ["https://www.google.com/*", "https://www.bing.com/*"],
   "background": {
     "service_worker": "background.js"

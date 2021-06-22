@@ -1,8 +1,38 @@
 chrome.webNavigation.onHistoryStateUpdated.addListener(detectSearch); // for now, this only partially works with Bing. Full compatibility with Google
 
+var currentNotificationId = null;
+chrome.notifications.onButtonClicked.addListener(function(notificationId, btnId)
+{
+    // if (notificationId === currentNotificationId)
+    // {
+        console.log(notificationId); //
+        if (btnId === 0)
+        {
+            // does not seem to be necessary since default behavior is close?
+        }
+        else if (btnId === 1)
+        {
+            chrome.tabs.create({ url: notificationId }, function(tab)
+            {
+                if(!tab)
+                {
+                  // Probably, there was no active window
+                  chrome.windows.create({url: notificationId, focused:true});
+                  console.log("There was no window");
+                }
+                else
+                {
+                  chrome.windows.update(tab.windowId, {focused: true});
+                  console.log("window was minimized");
+                }
+            });
+        }
+    // }
+});
+
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse)
 {      
-    var currentNotificationId = null;
+    // var currentNotificationId = null;
 
     var options =
     {
@@ -15,24 +45,10 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse)
         isClickable: true
     }
 
-    chrome.notifications.onButtonClicked.addListener(function(notificationId, btnId)
-    {
-        if (notificationId === currentNotificationId)
-        {
-            if (btnId === 0)
-            {
-                // does not seem to be necessary since default behavior is close?
-            }
-            else if (btnId === 1)
-            {
-                chrome.tabs.create({ url: request.message[2] });
-            }
-        }
-    });
 
-    chrome.notifications.create(options, function(notificationId)
+    chrome.notifications.create(request.message[2], options, function(notifId)
     {
-        currentNotificationId = notificationId;
+        currentNotificationId = request.message[2];
         console.log(chrome.runtime.lastError);
     });
 
