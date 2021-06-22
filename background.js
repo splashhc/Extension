@@ -1,17 +1,15 @@
 chrome.webNavigation.onHistoryStateUpdated.addListener(detectSearch); // for now, this only partially works with Bing. Full compatibility with Google
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse)
-{   
-    // console.log("The message is: " + request.message);
-    
+{      
         var options =
         {
-            type : "basic",
+            type: "basic",
             iconUrl: "https://www.google.com/favicon.ico",
-            title : "Did you know...",
-            message: request.message,
+            title: request.message[0],
+            message: request.message[1],
             priority: 1,
-            buttons:[ { title:'dismiss'}, {title:'learn more'} ],
+            buttons: [ { title:'dismiss'}, {title:'learn more'} ],
             isClickable: true
         }
         chrome.notifications.create("", options, function() { console.log(chrome.runtime.lastError); });    
