@@ -2,9 +2,6 @@ chrome.storage.local.get("query", function(data)
 {
   let query = data.query; // Change this if we're using randomized facts rather than context facts.
   processFacts(query);
-
-  // console.log("The query is: " + query);
-  // console.log("url is: " + url); 
 });
 
 async function processFacts(searchedQuery)
@@ -15,8 +12,6 @@ async function processFacts(searchedQuery)
   let facts = splitSummaryIntoFacts(summary);
   let result = getRandomFactFromFactArray(query, facts);
   chrome.runtime.sendMessage({message: result});
-
-  // console.log(result); -- Rather than logging the result, we will need to display the result somehow.
 }
 
 // Element 0 is pageId; Element 1 is wikipedia URL.
@@ -39,10 +34,8 @@ async function getSummaryFromPageId(pageId)
   return summary;
 }
 
-// Returns a string array of the summary split into individual sentences.
 function splitSummaryIntoFacts(summary)
 {
-  // str.replace(/\.(?!\d)|([^\d])\.(?=\d)/g,'$1.|') -- This regex may be better.
   return summary.replace(/((?<!Dr|Rd|Mr|Mrs|Ms|\b[A-Z])[.?!]\s*)/g, "$1|").split("|");
 }
 
