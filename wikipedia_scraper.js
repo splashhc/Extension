@@ -10,7 +10,8 @@ async function processFacts(searchedQuery)
   let urlAndPageId = await getUrlAndPageIdFromQuery(query);
   let summary = await getSummaryFromPageId(urlAndPageId[0]);
   let facts = splitSummaryIntoFacts(summary);
-  let result = getRandomFactFromFactArray(query, facts);
+  //let result = getRandomFactFromFactArray(query, facts);
+  let result = getRandomFactFromFactArray(query, facts, urlAndPageId[1]);
   chrome.runtime.sendMessage({message: result});
 }
 
@@ -39,13 +40,13 @@ function splitSummaryIntoFacts(summary)
   return summary.replace(/((?<!Dr|Rd|Mr|Mrs|Ms|Bros|Ltd|Inc|No|\b[A-Z])[.?!]\s*(?=[A-Z]))/g, "$1|").split("|").filter(fact => fact != "");
 }
 
-function getRandomFactFromFactArray(query, facts)
+function getRandomFactFromFactArray(query, facts, url)
 {
   let maxIndex = facts.length;
   let randomIndex = Math.floor((Math.random() * maxIndex));
   let formattedQuery = query.toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, char => char.toUpperCase());
   //let formattedFacts = `${formattedQuery}: ${facts[randomIndex]}`;
-  let formattedFacts = [formattedQuery, facts[randomIndex]];
+  let formattedFacts = [formattedQuery, facts[randomIndex], url];
 
   for(let i = 0; i < facts.length; i++)
   {

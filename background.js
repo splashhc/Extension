@@ -2,22 +2,43 @@ chrome.webNavigation.onHistoryStateUpdated.addListener(detectSearch); // for now
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse)
 {      
-        var options =
+    var currentNotificationId = null;
+
+    var options =
+    {
+        type: "basic",
+        iconUrl: "https://www.google.com/favicon.ico",
+        title: request.message[0],
+        message: request.message[1],
+        priority: 1,
+        buttons: [ { title: 'Dismiss' }, { title:'Learn More' } ],
+        isClickable: true
+    }
+
+    chrome.notifications.onButtonClicked.addListener(function(notificationId, btnId)
+    {
+        if (notificationId === currentNotificationId)
         {
-            type: "basic",
-            iconUrl: "https://www.google.com/favicon.ico",
-            title: request.message[0],
-            message: request.message[1],
-            priority: 1,
-            buttons: [ { title:'dismiss'}, {title:'learn more'} ],
-            isClickable: true
+            if (btnId === 0)
+            {
+                // does not seem to be necessary since default behavior is close?
+            }
+            else if (btnId === 1)
+            {
+                chrome.tabs.create({ url: request.message[2] });
+            }
         }
-        chrome.notifications.create("", options, function() { console.log(chrome.runtime.lastError); });    
+    });
+
+    chrome.notifications.create(options, function(notificationId)
+    {
+        currentNotificationId = notificationId;
+        console.log(chrome.runtime.lastError);
+    });
 
     sendResponse({message: 'success'});
     return true;
 });
-
 
 function detectSearch(details)
 {
