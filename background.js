@@ -24,8 +24,9 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse)
 function detectSearch(details)
 {
     // we only want to run the script once per page load and for only one frame
-    if(!details.url.match('chrome://new-tab-page/') && details.frameId == 0)
+    if(!details.url.match('chrome://new-tab-page/') && !details.url.match('http?s\:\/\/www\.google\.com\/$') && details.frameId == 0)
     {
+        console.log(details.url);
         chrome.scripting.executeScript({ 
             target: {tabId: details.tabId},
             files: ["search_detector.js"]}, _=> chrome.runtime.lastError);
