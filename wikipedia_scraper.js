@@ -36,7 +36,7 @@ async function getSummaryFromPageId(pageId)
 
 function splitSummaryIntoFacts(summary)
 {
-  return summary.replace(/((?<!Dr|Rd|Mr|Mrs|Ms|Bros|Ltd|Inc|No|(\d(?=\d))|\b[A-Z])[.?!]\s*(?=[A-Z]))/g, "$1|").split("|").filter(fact => fact != "");
+  return summary.replace(/((?<!Dr|Rd|Mr|Mrs|Ms|Bros|Ltd|Inc|No|\b[A-Z])[.?!]\s*(?=[A-Z]))/g, "$1|").split("|").filter(fact => fact != "");
 }
 
 function getRandomFactFromFactArray(query, facts)
