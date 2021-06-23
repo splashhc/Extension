@@ -9,11 +9,12 @@ chrome.notifications.onButtonClicked.addListener(function(notificationId, btnId)
     }
     else if (btnId === 1)
     {
-        chrome.tabs.create({ url: notificationId }, function(tab)
+        formattedUrl = notificationId.slice(0, -11);
+        chrome.tabs.create({ url: formattedUrl }, function(tab)
         {
             if(!tab)
             {
-                chrome.windows.create({url: notificationId, focused: true});
+                chrome.windows.create({url: formattedUrl, focused: true});
             }
             else
             {
@@ -36,9 +37,12 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse)
         isClickable: true
     }
 
-    chrome.notifications.create(request.message[2], options, function(notifId)
+    let rng = Math.random().toString().slice(2,13);;
+    let uniqueId = request.message[2] + rng;
+
+    chrome.notifications.create(uniqueId, options, function(notifId)
     {
-        currentNotificationId = request.message[2];
+        currentNotificationId = id;
         console.log(chrome.runtime.lastError);
     });
 
