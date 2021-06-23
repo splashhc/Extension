@@ -3,48 +3,38 @@ chrome.webNavigation.onHistoryStateUpdated.addListener(detectSearch); // for now
 var currentNotificationId = null;
 chrome.notifications.onButtonClicked.addListener(function(notificationId, btnId)
 {
-    // if (notificationId === currentNotificationId)
-    // {
-        console.log(notificationId); //
-        if (btnId === 0)
+    if (btnId === 0)
+    {
+        // does not seem to be necessary since default behavior is close?
+    }
+    else if (btnId === 1)
+    {
+        chrome.tabs.create({ url: notificationId }, function(tab)
         {
-            // does not seem to be necessary since default behavior is close?
-        }
-        else if (btnId === 1)
-        {
-            chrome.tabs.create({ url: notificationId }, function(tab)
+            if(!tab)
             {
-                if(!tab)
-                {
-                  // Probably, there was no active window
-                  chrome.windows.create({url: notificationId, focused:true});
-                  console.log("There was no window");
-                }
-                else
-                {
-                  chrome.windows.update(tab.windowId, {focused: true});
-                  console.log("window was minimized");
-                }
-            });
-        }
-    // }
+                chrome.windows.create({url: notificationId, focused: true});
+            }
+            else
+            {
+                chrome.windows.update(tab.windowId, {focused: true});
+            }
+        });
+    }
 });
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse)
 {      
-    // var currentNotificationId = null;
-
     var options =
     {
         type: "basic",
-        iconUrl: "https://www.google.com/favicon.ico",
+        iconUrl: "../images/notification48.png",
         title: request.message[0],
         message: request.message[1],
         priority: 1,
-        buttons: [ { title: 'Dismiss' }, { title:'Learn More' } ],
+        buttons: [ { title: 'Dismiss' }, { title: 'Learn More' } ],
         isClickable: true
     }
-
 
     chrome.notifications.create(request.message[2], options, function(notifId)
     {
