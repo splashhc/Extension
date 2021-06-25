@@ -52,7 +52,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse)
 
 function detectSearch(details)
 {
-    // we only want to run the script once per page load and for only one frame
+    // We only want to run the script once per page load and for only one frame
     if(!details.url.match('chrome://new-tab-page/') && !details.url.match('http?s\:\/\/www\.google\.com\/$') && details.frameId == 0)
     {
         console.log(details.url);
@@ -66,13 +66,10 @@ function detectSearch(details)
     }
 }
 
-chrome.runtime.onMessage.addListener(
-    function (request, sender, sendResponse) {
-        if (request.cmd === "setOnOffState") {
-            isExtensionOn = request.data.value;
-        }
-
-        if (request.cmd === "getOnOffState") {
-            sendResponse(isExtensionOn);
+chrome.storage.local.get('enabled', data => {
+    if (data.enabled) {
+        // Enabled
+    } else {
+        // Disabled
     }
 });
