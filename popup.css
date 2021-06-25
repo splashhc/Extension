@@ -25,6 +25,12 @@ body
     padding: 5px;
 }
 
+.disable-option
+{
+    display: flex;
+    padding: 5px;
+}
+
 .dark-mode-toggle
 {
     margin: auto 0 auto auto;

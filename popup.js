@@ -79,5 +79,3 @@ chrome.extension.sendMessage({cmd: "getOnOffState"}, function (response) {
         }
     });
 });
-
-// Issues with button function itself; will resume work shortly.
