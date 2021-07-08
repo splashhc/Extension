@@ -3,11 +3,7 @@ chrome.webNavigation.onHistoryStateUpdated.addListener(detectSearch); // for now
 var currentNotificationId = null;
 chrome.notifications.onButtonClicked.addListener(function(notificationId, btnId)
 {
-    if (btnId === 0)
-    {
-        // does not seem to be necessary since default behavior is close?
-    }
-    else if (btnId === 1)
+    if(btnId === 1)
     {
         formattedUrl = notificationId.slice(0, -11);
         chrome.tabs.create({ url: formattedUrl }, function(tab)
@@ -40,10 +36,15 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse)
     let rng = Math.random().toString().slice(2,13);;
     let uniqueId = request.message[2] + rng;
 
-    chrome.notifications.create(uniqueId, options, function(notifId)
+    chrome.storage.local.get('extensionEnabled', data =>
     {
-        currentNotificationId = id;
-        console.log(chrome.runtime.lastError);
+        if(data.extensionEnabled)
+        {
+            chrome.notifications.create(uniqueId, options, function()
+            {
+                currentNotificationId = id;
+            });        
+        }
     });
 
     sendResponse({message: 'success'});
@@ -55,7 +56,6 @@ function detectSearch(details)
     // We only want to run the script once per page load and for only one frame
     if(!details.url.match('chrome://new-tab-page/') && !details.url.match('http?s\:\/\/www\.google\.com\/$') && details.frameId == 0)
     {
-        console.log(details.url);
         chrome.scripting.executeScript({ 
             target: {tabId: details.tabId},
             files: ["search_detector.js"]}, _=> chrome.runtime.lastError);
@@ -65,11 +65,3 @@ function detectSearch(details)
             files: ["wikipedia_scraper.js"]}, _=> chrome.runtime.lastError);
     }
 }
-
-chrome.storage.local.get('enabled', data => {
-    if (data.enabled) {
-        // Enabled
-    } else {
-        // Disabled
-    }
-});

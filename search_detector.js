@@ -6,7 +6,7 @@ chrome.storage.local.set({"query": query});
 function getSearchUtf8(url)
 {
     let searchTerms = [];
-    let currentTerm = undefined;
+    let currentTerm = null;
     let termBuffer = url.slice(url.indexOf('?') + 1).split('&');
     for(let index = 0; index < termBuffer.length; index++)
     {
